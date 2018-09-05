@@ -14,16 +14,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.jordy.mapclient.Fragments.ListaFragment;
 import com.jordy.mapclient.Fragments.MainFragment;
 import com.jordy.mapclient.Fragments.PerfilFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+
+    SupportMapFragment sMapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ///
+        sMapFragment = SupportMapFragment.newInstance();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,6 +57,8 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
+
+        sMapFragment.getMapAsync(this);
 
     }
 
@@ -86,18 +97,26 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         FragmentManager fm = getSupportFragmentManager();
 
+        ////
+        android.support.v4.app.FragmentManager sFm = getSupportFragmentManager();
 
         int id = item.getItemId();
 
+        if (sMapFragment.isAdded()){
+            sFm.beginTransaction().hide(sMapFragment).commit();
+        }
         if (id == R.id.fm_main) {
             fm.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
         } else if (id == R.id.fm_lista) {
             fm.beginTransaction().replace(R.id.content_frame, new ListaFragment()).commit();
         } else if (id == R.id.fm_mapa) {
-
+            if (!sMapFragment.isAdded())
+                sFm.beginTransaction().add(R.id.map, sMapFragment).commit();
+            else
+                sFm.beginTransaction().show(sMapFragment).commit();
         } else if (id == R.id.fm_perfil) {
             fm.beginTransaction().replace(R.id.content_frame, new PerfilFragment()).commit();
         }
@@ -105,5 +124,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //Aqui se Agregan lat log etc
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
     }
 }
