@@ -7,19 +7,19 @@
         <menu>
             <item
                 android:id="@+id/fm_main"
-                android:icon="@drawable/ic_menu_camera"
+                android:icon="@drawable/icono_home"
                 android:title="Inicio" />
             <item
                 android:id="@+id/fm_lista"
-                android:icon="@drawable/ic_menu_camera"
+                android:icon="@drawable/icono_lista"
                 android:title="Mis Clientes" />
             <item
                 android:id="@+id/fm_mapa"
-                android:icon="@drawable/ic_menu_gallery"
+                android:icon="@drawable/icono_location"
                 android:title="Mapa" />
             <item
                 android:id="@+id/fm_perfil"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/icono_persona"
                 android:title="Perfil" />
         </menu>
     </item>
