@@ -113,10 +113,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.fm_lista) {
             fm.beginTransaction().replace(R.id.content_frame, new ListaFragment()).commit();
         } else if (id == R.id.fm_mapa) {
-            if (!sMapFragment.isAdded())
+            if (!sMapFragment.isAdded()) {
                 sFm.beginTransaction().add(R.id.map, sMapFragment).commit();
-            else
+            }
+            else {
                 sFm.beginTransaction().show(sMapFragment).commit();
+            }
         } else if (id == R.id.fm_perfil) {
             fm.beginTransaction().replace(R.id.content_frame, new PerfilFragment()).commit();
         }

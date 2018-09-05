@@ -27,6 +27,14 @@
         <activity
             android:name=".MainActivity">
 
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
 
         <meta-data
@@ -36,15 +44,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBF-nMKjBtmz_glPZHU6v3gdwD16YBY2i8" />
 
+
+
         <activity
             android:name=".LoginActivity">
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
     </application>
